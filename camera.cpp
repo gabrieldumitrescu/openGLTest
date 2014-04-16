@@ -106,7 +106,7 @@ void Camera::Init(){
         }
     }
     
-    angleV = -ToDegree(asin(m_target.y));
+    angleV = -ToDegree(asin(target.y));
 
     onUpperEdge = false;
     onLowerEdge = false;
