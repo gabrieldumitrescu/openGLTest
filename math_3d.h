@@ -18,6 +18,12 @@ struct Vector2i{
     int x,y;
 };
 
+struct Vector2f{
+    float x,y;
+    Vector2f():x(0.0f), y(0.0f){}
+    Vector2f(float u, float v):x(u),y(v){}
+};
+
 struct PersProjInfo{
     float FOV, width,height,zNear,zFar;
 };

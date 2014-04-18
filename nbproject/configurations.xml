@@ -7,6 +7,7 @@
       <itemPath>Pipeline.h</itemPath>
       <itemPath>camera.h</itemPath>
       <itemPath>math_3d.h</itemPath>
+      <itemPath>texture.h</itemPath>
       <itemPath>util.h</itemPath>
     </logicalFolder>
     <logicalFolder name="ResourceFiles"
@@ -20,6 +21,7 @@
       <itemPath>camera.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>math_3d.cpp</itemPath>
+      <itemPath>texture.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
                    displayName="Test Files"
@@ -42,8 +44,22 @@
         <rebuildPropChanged>false</rebuildPropChanged>
       </toolsSet>
       <compileType>
+        <ccTool>
+          <incDir>
+            <pElem>/usr/include/ImageMagick</pElem>
+          </incDir>
+          <warningLevel>2</warningLevel>
+        </ccTool>
         <linkerTool>
-          <commandLine>-lglut -lGLEW -lGL</commandLine>
+          <linkerAddLib>
+            <pElem>/usr/include/GL</pElem>
+          </linkerAddLib>
+          <linkerLibItems>
+            <linkerOptionItem>-lglut</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs glew`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs gl`</linkerOptionItem>
+            <linkerOptionItem>`pkg-config --libs ImageMagick++`</linkerOptionItem>
+          </linkerLibItems>
         </linkerTool>
       </compileType>
       <item path="Pipeline.cpp" ex="false" tool="1" flavor2="0">
@@ -59,6 +75,10 @@
       <item path="math_3d.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="math_3d.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="texture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="texture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="util.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -96,6 +116,10 @@
       <item path="math_3d.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="math_3d.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="texture.cpp" ex="false" tool="1" flavor2="0">
+      </item>
+      <item path="texture.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="util.h" ex="false" tool="3" flavor2="0">
       </item>

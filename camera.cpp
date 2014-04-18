@@ -80,7 +80,7 @@ void Camera::Init(){
     {
         if (HTarget.x >= 0.0f)
         {
-            angleH = 360.0f - ToDegree(asin(HTarget.z));
+            angleH =  - ToDegree(asin(HTarget.z));
         }
         else
         {
@@ -168,8 +168,8 @@ void Camera::onMouse(int x, int y){
     mousePos.x = x;
     mousePos.y = y;
 
-    angleH += (float)DeltaX / 20.0f;
-    angleV += (float)DeltaY / 20.0f;
+    angleH += (float)DeltaX / 40.0f;
+    angleV += (float)DeltaY / 40.0f;
 
     if (DeltaX == 0) {
         if (x <= MARGIN) {

@@ -38,7 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/Pipeline.o \
 	${OBJECTDIR}/camera.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/math_3d.o
+	${OBJECTDIR}/math_3d.o \
+	${OBJECTDIR}/texture.o
 
 
 # C Compiler Flags
@@ -55,7 +56,7 @@ FFLAGS=
 ASFLAGS=
 
 # Link Libraries and Options
-LDLIBSOPTIONS=
+LDLIBSOPTIONS=-L/usr/include/GL -lglut `pkg-config --libs glew` `pkg-config --libs gl` `pkg-config --libs ImageMagick++`  
 
 # Build Targets
 .build-conf: ${BUILD_SUBPROJECTS}
@@ -63,27 +64,32 @@ LDLIBSOPTIONS=
 
 ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/opengltest: ${OBJECTFILES}
 	${MKDIR} -p ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}
-	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/opengltest ${OBJECTFILES} ${LDLIBSOPTIONS} -lglut -lGLEW -lGL
+	${LINK.cc} -o ${CND_DISTDIR}/${CND_CONF}/${CND_PLATFORM}/opengltest ${OBJECTFILES} ${LDLIBSOPTIONS}
 
 ${OBJECTDIR}/Pipeline.o: Pipeline.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pipeline.o Pipeline.cpp
+	$(COMPILE.cc) -g -Wall -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags gl` `pkg-config --cflags ImageMagick++`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/Pipeline.o Pipeline.cpp
 
 ${OBJECTDIR}/camera.o: camera.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/camera.o camera.cpp
+	$(COMPILE.cc) -g -Wall -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags gl` `pkg-config --cflags ImageMagick++`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/camera.o camera.cpp
 
 ${OBJECTDIR}/main.o: main.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
+	$(COMPILE.cc) -g -Wall -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags gl` `pkg-config --cflags ImageMagick++`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/main.o main.cpp
 
 ${OBJECTDIR}/math_3d.o: math_3d.cpp 
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
-	$(COMPILE.cc) -g -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/math_3d.o math_3d.cpp
+	$(COMPILE.cc) -g -Wall -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags gl` `pkg-config --cflags ImageMagick++`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/math_3d.o math_3d.cpp
+
+${OBJECTDIR}/texture.o: texture.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -g -Wall -I/usr/include/ImageMagick `pkg-config --cflags glew` `pkg-config --cflags gl` `pkg-config --cflags ImageMagick++`   -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/texture.o texture.cpp
 
 # Subprojects
 .build-subprojects:

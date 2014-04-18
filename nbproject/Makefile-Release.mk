@@ -38,7 +38,8 @@ OBJECTFILES= \
 	${OBJECTDIR}/Pipeline.o \
 	${OBJECTDIR}/camera.o \
 	${OBJECTDIR}/main.o \
-	${OBJECTDIR}/math_3d.o
+	${OBJECTDIR}/math_3d.o \
+	${OBJECTDIR}/texture.o
 
 
 # C Compiler Flags
@@ -84,6 +85,11 @@ ${OBJECTDIR}/math_3d.o: math_3d.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/math_3d.o math_3d.cpp
+
+${OBJECTDIR}/texture.o: texture.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/texture.o texture.cpp
 
 # Subprojects
 .build-subprojects:

@@ -10,6 +10,8 @@
 #include <assert.h>
 #include <GL/glew.h>
 #include <GL/freeglut.h>
+
+#include "texture.h"
 #include "util.h"
 #include "math_3d.h"
 #include "Pipeline.h"
@@ -18,9 +20,20 @@
 #define WINDOW_WIDTH 1280
 #define WINDOW_HEIGHT 800
 
+struct Vertex{
+    Vector3f pos;
+    Vector2f texCoord;
+    Vertex(){}
+    Vertex(const Vector3f& position, const Vector2f& textureCoord):
+    pos(position),texCoord(textureCoord){}
+    
+};
+
 GLuint VBObj;
 GLuint IBObj;
+GLuint gSamplerLocation;
 GLuint gWVPLocation;
+Texture* pTexture=NULL;
 
 Camera* pGameCamera=NULL;
 
@@ -66,11 +79,19 @@ int main(int argc, char** argv){
 
   
   glClearColor(0.0f,0.0f,0.0f,0.0f);
+  glFrontFace(GL_CW);
+  glCullFace(GL_BACK);
+  glEnable(GL_CULL_FACE);
 
   createVertexBuffer();
   createIndexBuffer();
   CompileShaders(); 
 
+  glUniform1i(gSamplerLocation, 0);
+  pTexture = new Texture(GL_TEXTURE_2D, "test.png");
+  if (!pTexture->load()) {
+        return 1;
+  }
   glutMainLoop();
 
   return 0;
@@ -81,10 +102,6 @@ void displayCB(){
   
   glClear(GL_COLOR_BUFFER_BIT);
 
-  glEnableVertexAttribArray(0);
-
-  glBindBuffer(GL_ARRAY_BUFFER,VBObj);
-  glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,0,0);
 
   static float Scale=0.0f;
   Scale+=0.1f;
@@ -95,12 +112,20 @@ void displayCB(){
   p.setPersProj(60.0f,WINDOW_WIDTH,WINDOW_HEIGHT,1.0f,100.0f);
   p.setCamera(pGameCamera->getPosition(),pGameCamera->getTarget(), pGameCamera->getUp());
   glUniformMatrix4fv(gWVPLocation,1,GL_TRUE,(const GLfloat*)p.getTransform());
+
+  glEnableVertexAttribArray(0);
+  glEnableVertexAttribArray(1);
+  glBindBuffer(GL_ARRAY_BUFFER,VBObj);
+  glVertexAttribPointer(0,3,GL_FLOAT,GL_FALSE,sizeof(Vertex),0);
+  glVertexAttribPointer(1,2,GL_FLOAT,GL_FALSE,sizeof(Vertex),(const GLvoid*)12);
   
+  pTexture->bind(GL_TEXTURE0);
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,IBObj);
     
   glDrawElements(GL_TRIANGLES, 12, GL_UNSIGNED_INT, 0);
 
   glDisableVertexAttribArray(0);
+  glDisableVertexAttribArray(1);
 
   glutSwapBuffers();
 
@@ -115,7 +140,7 @@ void specialKeyboardCB(int Key, int x, int y)
 void keyboardCB(unsigned char Key, int x, int y){
     switch(Key){
         case 'q':
-            exit(0);
+            glutLeaveMainLoop();
             break;
     }
 }
@@ -134,11 +159,11 @@ void initGlutCallbacks(){
 }
 
 void createVertexBuffer(){
-  Vector3f vertices[4];
-  vertices[0] = Vector3f(-1.0f, -1.0f, 0.5773f);
-  vertices[1] = Vector3f(0.0f, -1.0f, -1.15475f);
-  vertices[2] = Vector3f(1.0f, -1.0f, 0.5773f);
-  vertices[3] = Vector3f(0.0f, 1.0f, 0.0f);
+  Vertex vertices[4];
+  vertices[0] = Vertex(Vector3f(-1.0f, -1.0f,  0.5773f),Vector2f(0.0f,0.0f));
+  vertices[1] = Vertex(Vector3f( 0.0f, -1.0f, -1.15475f),Vector2f(0.5f,0.0f));
+  vertices[2] = Vertex(Vector3f( 1.0f, -1.0f,  0.5773f),Vector2f(1.0f,0.0f));
+  vertices[3] = Vertex(Vector3f( 0.0f,  1.0f,  0.0f),Vector2f(0.5f,1.0f));
   glGenBuffers(1,&VBObj);
   glBindBuffer(GL_ARRAY_BUFFER,VBObj);
   glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
@@ -201,6 +226,8 @@ void CompileShaders()
         exit(1);
     };
 
+   // printf("Vertex shader:%s\n",vs.c_str());
+    //printf("Fragment shader:%s\n",fs.c_str());
     AddShader(ShaderProgram, vs.c_str(), GL_VERTEX_SHADER);
     AddShader(ShaderProgram, fs.c_str(), GL_FRAGMENT_SHADER);
 
@@ -209,11 +236,11 @@ void CompileShaders()
 
     glLinkProgram(ShaderProgram);
     glGetProgramiv(ShaderProgram, GL_LINK_STATUS, &Success);
-	if (Success == 0) {
-		glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
-		fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
-        exit(1);
-	}
+    if (Success == 0) {
+            glGetProgramInfoLog(ShaderProgram, sizeof(ErrorLog), NULL, ErrorLog);
+            fprintf(stderr, "Error linking shader program: '%s'\n", ErrorLog);
+    exit(1);
+    }
 
     glValidateProgram(ShaderProgram);
     glGetProgramiv(ShaderProgram, GL_VALIDATE_STATUS, &Success);
@@ -227,6 +254,10 @@ void CompileShaders()
     
     gWVPLocation=glGetUniformLocation(ShaderProgram,"gWVP");
     assert(gWVPLocation!=0xFFFFFFFF);
+    
+    gSamplerLocation=glGetUniformLocation(ShaderProgram,"gSampler");
+    assert(gSamplerLocation!=0xFFFFFFFF);
+    
 }
 
 
