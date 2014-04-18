@@ -5,13 +5,6 @@
 #include <GL/freeglut.h>
 #include "camera.h"
 
-Camera::Camera():windowWidth(0),windowHeight(0){
-    pos=Vector3f(0.0f,0.0f,0.0f);
-    target=Vector3f(0.0f,0.0f,1.0f);
-    up=Vector3f(0.0f,1.0f,0.0f);
-    Init();
-}
-
 Camera::Camera(int WindowWidth, int WindowHeight):
     windowWidth(WindowWidth),windowHeight(WindowHeight)
 {
@@ -175,8 +168,8 @@ void Camera::onMouse(int x, int y){
     mousePos.x = x;
     mousePos.y = y;
 
-    angleH += (float)DeltaX / 1000.0f;
-    angleV += (float)DeltaY / 1000.0f;
+    angleH += (float)DeltaX / 20.0f;
+    angleV += (float)DeltaY / 20.0f;
 
     if (DeltaX == 0) {
         if (x <= MARGIN) {

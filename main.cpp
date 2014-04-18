@@ -15,8 +15,8 @@
 #include "Pipeline.h"
 #include "camera.h"
 
-#define WINDOW_WIDTH 1366
-#define WINDOW_HEIGHT 768
+#define WINDOW_WIDTH 1280
+#define WINDOW_HEIGHT 800
 
 GLuint VBObj;
 GLuint IBObj;
@@ -49,7 +49,7 @@ int main(int argc, char** argv){
   }
   
   glutCreateWindow("Test openGL");
-  glutGameModeString("1366x768@32");
+  glutGameModeString("1280x800@32");
   glutEnterGameMode();
 
   initGlutCallbacks();
@@ -77,6 +77,7 @@ int main(int argc, char** argv){
 }
 
 void displayCB(){
+    pGameCamera->onRender();
   
   glClear(GL_COLOR_BUFFER_BIT);
 

@@ -23,7 +23,9 @@ private:
     Vector3f scale,rotation,translation;
     Matrix4f transform;
     PersProjInfo persProj;
-    Camera camera;
+    struct{
+      Vector3f pos,target,up;  
+    }cameraInfo;
     
     
 };

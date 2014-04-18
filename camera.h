@@ -14,7 +14,6 @@ static const float MARGIN=10.0f;
 
 class Camera{
 public:
-    Camera();
     Camera(int WindowWidth, int WindowHeight);
     Camera(int WindowWidth, int WindowHeight, const Vector3f&,const Vector3f&,const Vector3f&);
     const Vector3f& getTarget() const;

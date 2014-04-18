@@ -11,7 +11,6 @@ Pipeline::Pipeline(){
     scale=Vector3f(1.0f,1.0f,1.0f);
     rotation=Vector3f();
     translation=Vector3f();
-    camera=Camera(0,0);
 }
 
 void Pipeline::setScale(float x, float y, float z){
@@ -41,7 +40,9 @@ void Pipeline::setPersProj(float FOV, float width, float height, float zNear, fl
 }
 
 void Pipeline::setCamera(const Vector3f& pos,const Vector3f& target,const Vector3f& up){
-    camera=Camera(0,0,pos,target,up);
+    cameraInfo.pos=pos;
+    cameraInfo.target=target;
+    cameraInfo.up=up;
 }
 
 const Matrix4f* Pipeline::getTransform(){
@@ -50,8 +51,8 @@ const Matrix4f* Pipeline::getTransform(){
     rotMat.initRotation(rotation.x,rotation.y,rotation.z);
     transMat.initTranslation(translation.x,translation.y,translation.z);
     persProjMat.initPerspProj(persProj);
-    cameraTranslMat.initTranslation(-camera.getPosition().x,-camera.getPosition().y,-camera.getPosition().z);
-    cameraTransfMat.initCameraTransf(camera.getTarget(),camera.getUp());
+    cameraTranslMat.initTranslation(-cameraInfo.pos.x,-cameraInfo.pos.y,-cameraInfo.pos.z);
+    cameraTransfMat.initCameraTransf(cameraInfo.target,cameraInfo.up);
     transform=persProjMat*cameraTransfMat*cameraTranslMat*transMat*rotMat*scMat;
     return &transform;
 }

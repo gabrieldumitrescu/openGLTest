@@ -9,19 +9,19 @@ CND_DISTDIR=dist
 # Debug configuration
 CND_PLATFORM_Debug=GNU-Linux-x86
 CND_ARTIFACT_DIR_Debug=dist/Debug/GNU-Linux-x86
-CND_ARTIFACT_NAME_Debug=opengltestnb
-CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/opengltestnb
+CND_ARTIFACT_NAME_Debug=opengltest
+CND_ARTIFACT_PATH_Debug=dist/Debug/GNU-Linux-x86/opengltest
 CND_PACKAGE_DIR_Debug=dist/Debug/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Debug=opengltestnb.tar
-CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/opengltestnb.tar
+CND_PACKAGE_NAME_Debug=opengltest.tar
+CND_PACKAGE_PATH_Debug=dist/Debug/GNU-Linux-x86/package/opengltest.tar
 # Release configuration
 CND_PLATFORM_Release=GNU-Linux-x86
 CND_ARTIFACT_DIR_Release=dist/Release/GNU-Linux-x86
-CND_ARTIFACT_NAME_Release=opengltestnb
-CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/opengltestnb
+CND_ARTIFACT_NAME_Release=opengltest
+CND_ARTIFACT_PATH_Release=dist/Release/GNU-Linux-x86/opengltest
 CND_PACKAGE_DIR_Release=dist/Release/GNU-Linux-x86/package
-CND_PACKAGE_NAME_Release=opengltestnb.tar
-CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/opengltestnb.tar
+CND_PACKAGE_NAME_Release=opengltest.tar
+CND_PACKAGE_PATH_Release=dist/Release/GNU-Linux-x86/package/opengltest.tar
 #
 # include compiler specific variables
 #

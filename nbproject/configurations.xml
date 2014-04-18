@@ -43,7 +43,7 @@
       </toolsSet>
       <compileType>
         <linkerTool>
-          <commandLine>-lglut -lGLEW</commandLine>
+          <commandLine>-lglut -lGLEW -lGL</commandLine>
         </linkerTool>
       </compileType>
       <item path="Pipeline.cpp" ex="false" tool="1" flavor2="0">
