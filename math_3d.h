@@ -34,7 +34,8 @@ struct Vector3f{
     Vector3f& operator*=(float scalar);
 
     void normalize();
-    Vector3f cross(const Vector3f& right);
+    Vector3f cross(const Vector3f& right) const ;
+    void rotate(float angle,const Vector3f& axis);
 };
 
 

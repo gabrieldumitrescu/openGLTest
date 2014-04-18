@@ -9,7 +9,8 @@
 #define	CAMERA_H
 #include "math_3d.h"
 
-const static float StepScale = 0.1f;
+static const float StepScale = 0.1f;
+static const float MARGIN=10.0f;
 
 class Camera{
 public:

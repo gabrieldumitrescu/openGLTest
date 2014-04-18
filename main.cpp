@@ -15,20 +15,22 @@
 #include "Pipeline.h"
 #include "camera.h"
 
-#define WINDOW_WIDTH 1024
+#define WINDOW_WIDTH 1366
 #define WINDOW_HEIGHT 768
 
 GLuint VBObj;
 GLuint IBObj;
 GLuint gWVPLocation;
 
-Camera gameCamera(WINDOW_WIDTH,WINDOW_HEIGHT);
+Camera* pGameCamera=NULL;
 
 const char* pVSFileName = "shader.vs";
 const char* pFSFileName = "shader.fs";
 
 void displayCB();
 void specialKeyboardCB(int,int,int);
+void keyboardCB(unsigned char,int,int);
+void passiveMouseCB(int,int);
 void initGlutCallbacks();
 void createVertexBuffer();
 void createIndexBuffer();
@@ -47,8 +49,12 @@ int main(int argc, char** argv){
   }
   
   glutCreateWindow("Test openGL");
+  glutGameModeString("1366x768@32");
+  glutEnterGameMode();
 
   initGlutCallbacks();
+  
+  pGameCamera = new Camera(WINDOW_WIDTH, WINDOW_HEIGHT);
 
   // Must be done after glut is initialized!
    GLenum res = glewInit();
@@ -86,7 +92,7 @@ void displayCB(){
   p.setTranslation(0.0f, 0.0f, 3.0f);
   p.setRotation(0.0f,Scale,0.0f);
   p.setPersProj(60.0f,WINDOW_WIDTH,WINDOW_HEIGHT,1.0f,100.0f);
-  p.setCamera(gameCamera.getPosition(),gameCamera.getTarget(), gameCamera.getUp());
+  p.setCamera(pGameCamera->getPosition(),pGameCamera->getTarget(), pGameCamera->getUp());
   glUniformMatrix4fv(gWVPLocation,1,GL_TRUE,(const GLfloat*)p.getTransform());
   
   glBindBuffer(GL_ELEMENT_ARRAY_BUFFER,IBObj);
@@ -101,14 +107,28 @@ void displayCB(){
 
 void specialKeyboardCB(int Key, int x, int y)
 {
-    gameCamera.onKeyboard(Key);
+    pGameCamera->onKeyboard(Key);
     //fprintf(stderr,"Keypress with mouse at %d x %d \n", x, y);
+}
+
+void keyboardCB(unsigned char Key, int x, int y){
+    switch(Key){
+        case 'q':
+            exit(0);
+            break;
+    }
+}
+
+void passiveMouseCB(int x, int y){
+    pGameCamera->onMouse(x,y);
 }
 
 void initGlutCallbacks(){
   glutDisplayFunc(displayCB);
   glutIdleFunc(displayCB);
   glutSpecialFunc(specialKeyboardCB);
+  glutPassiveMotionFunc(passiveMouseCB);
+  glutKeyboardFunc(keyboardCB);
   
 }
 

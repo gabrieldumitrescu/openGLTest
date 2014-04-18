@@ -33,13 +33,30 @@ void Vector3f::normalize(){
     z/=mod;
 }
 
-Vector3f Vector3f::cross(const Vector3f& right){
+Vector3f Vector3f::cross(const Vector3f& right) const {
     const float _x = y * right.z - z * right.y;
     const float _y = z * right.x - x * right.z;
     const float _z = x * right.y - y * right.x;
 
     return Vector3f(_x, _y, _z);
     
+}
+
+void Vector3f::rotate(float angle, const Vector3f& axis){
+    const float sinHalfAngle=sinf(ToRadian(angle/2));
+    const float cosHalfAngle=cosf(ToRadian(angle/2));
+    
+    const float rx=axis.x*sinHalfAngle;
+    const float ry=axis.y*sinHalfAngle;
+    const float rz=axis.z*sinHalfAngle;
+    const float rw=cosHalfAngle;
+    Quaternion rotation(rx,ry,rz,rw);
+    Quaternion rotConjugate=rotation.conjugate();
+    
+    Quaternion result=rotation * (*this) * rotConjugate;
+    x=result.x;
+    y=result.y;
+    z=result.z;
 }
 
 

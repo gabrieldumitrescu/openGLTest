@@ -117,3 +117,94 @@ void Camera::Init(){
 
     glutWarpPointer(mousePos.x, mousePos.y);
 }
+
+void Camera::Update(){
+    const Vector3f Vaxis(0.0f, 1.0f, 0.0f);
+
+    // Rotate the view vector by the horizontal angle around the vertical axis
+    Vector3f View(1.0f, 0.0f, 0.0f);
+    View.rotate(angleH, Vaxis);
+    View.normalize();
+
+    // Rotate the view vector by the vertical angle around the horizontal axis
+    Vector3f Haxis = Vaxis.cross(View);
+    Haxis.normalize();
+    View.rotate(angleV, Haxis);
+       
+    target = View;
+    target.normalize();
+
+    up = target.cross(Haxis);
+    up.normalize();
+}
+
+void Camera::onRender(){
+     bool ShouldUpdate = false;
+
+    if (onLeftEdge) {
+        angleH -= 0.1f;
+        ShouldUpdate = true;
+    }
+    else if (onRightEdge) {
+        angleH += 0.1f;
+        ShouldUpdate = true;
+    }
+
+    if (onUpperEdge) {
+        if (angleV > -90.0f) {
+            angleV -= 0.1f;
+            ShouldUpdate = true;
+        }
+    }
+    else if (onLowerEdge) {
+        if (angleV < 90.0f) {
+           angleV += 0.1f;
+           ShouldUpdate = true;
+        }
+    }
+
+    if (ShouldUpdate) {
+        Update();
+    }
+}
+
+void Camera::onMouse(int x, int y){
+    const int DeltaX = x - mousePos.x;
+    const int DeltaY = y - mousePos.y;
+
+    mousePos.x = x;
+    mousePos.y = y;
+
+    angleH += (float)DeltaX / 1000.0f;
+    angleV += (float)DeltaY / 1000.0f;
+
+    if (DeltaX == 0) {
+        if (x <= MARGIN) {
+        //    m_AngleH -= 1.0f;
+            onLeftEdge = true;
+        }
+        else if (x >= (windowWidth - MARGIN)) {
+        //    m_AngleH += 1.0f;
+            onRightEdge = true;
+        }
+    }
+    else {
+        onLeftEdge = false;
+        onRightEdge = false;
+    }
+
+    if (DeltaY == 0) {
+        if (y <= MARGIN) {
+            onUpperEdge = true;
+        }
+        else if (y >= (windowHeight - MARGIN)) {
+            onLowerEdge = true;
+        }
+    }
+    else {
+        onUpperEdge = false;
+        onLowerEdge = false;
+    }
+
+    Update();
+}
