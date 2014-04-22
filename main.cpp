@@ -17,8 +17,8 @@
 #include "Pipeline.h"
 #include "camera.h"
 
-#define WINDOW_WIDTH 1280
-#define WINDOW_HEIGHT 800
+#define WINDOW_WIDTH 1366
+#define WINDOW_HEIGHT 768
 
 struct Vertex{
     Vector3f pos;
@@ -62,7 +62,7 @@ int main(int argc, char** argv){
   }
   
   glutCreateWindow("Test openGL");
-  glutGameModeString("1280x800@32");
+  glutGameModeString("1366x768@32");
   glutEnterGameMode();
 
   initGlutCallbacks();
@@ -161,9 +161,9 @@ void initGlutCallbacks(){
 void createVertexBuffer(){
   Vertex vertices[4];
   vertices[0] = Vertex(Vector3f(-1.0f, -1.0f,  0.5773f),Vector2f(0.0f,0.0f));
-  vertices[1] = Vertex(Vector3f( 0.0f, -1.0f, -1.15475f),Vector2f(0.5f,0.0f));
+  vertices[1] = Vertex(Vector3f( 0.0f, -1.0f, -1.15475f),Vector2f(0.563f,0.0f));
   vertices[2] = Vertex(Vector3f( 1.0f, -1.0f,  0.5773f),Vector2f(1.0f,0.0f));
-  vertices[3] = Vertex(Vector3f( 0.0f,  1.0f,  0.0f),Vector2f(0.5f,1.0f));
+  vertices[3] = Vertex(Vector3f( 0.0f,  1.0f,  0.0f),Vector2f(0.563f,1.0f));
   glGenBuffers(1,&VBObj);
   glBindBuffer(GL_ARRAY_BUFFER,VBObj);
   glBufferData(GL_ARRAY_BUFFER,sizeof(vertices),vertices,GL_STATIC_DRAW);
