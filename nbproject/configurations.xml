@@ -7,6 +7,7 @@
       <itemPath>Pipeline.h</itemPath>
       <itemPath>camera.h</itemPath>
       <itemPath>math_3d.h</itemPath>
+      <itemPath>technique.h</itemPath>
       <itemPath>texture.h</itemPath>
       <itemPath>util.h</itemPath>
     </logicalFolder>
@@ -78,6 +79,8 @@
       </item>
       <item path="math_3d.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="technique.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="texture.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="texture.h" ex="false" tool="3" flavor2="0">
@@ -118,6 +121,8 @@
       <item path="math_3d.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="math_3d.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="technique.h" ex="false" tool="3" flavor2="0">
       </item>
       <item path="texture.cpp" ex="false" tool="1" flavor2="0">
       </item>
