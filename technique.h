@@ -10,6 +10,10 @@
 
 
 #include <list>
+#include <GL/glew.h>
+#include <stdio.h>
+#include <string.h>
+
 #define INVALID_UNIFORM_LOCATION 0xFFFFFFFF
 
 class Technique{

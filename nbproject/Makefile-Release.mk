@@ -39,6 +39,7 @@ OBJECTFILES= \
 	${OBJECTDIR}/camera.o \
 	${OBJECTDIR}/main.o \
 	${OBJECTDIR}/math_3d.o \
+	${OBJECTDIR}/technique.o \
 	${OBJECTDIR}/texture.o
 
 
@@ -85,6 +86,11 @@ ${OBJECTDIR}/math_3d.o: math_3d.cpp
 	${MKDIR} -p ${OBJECTDIR}
 	${RM} "$@.d"
 	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/math_3d.o math_3d.cpp
+
+${OBJECTDIR}/technique.o: technique.cpp 
+	${MKDIR} -p ${OBJECTDIR}
+	${RM} "$@.d"
+	$(COMPILE.cc) -O2 -MMD -MP -MF "$@.d" -o ${OBJECTDIR}/technique.o technique.cpp
 
 ${OBJECTDIR}/texture.o: texture.cpp 
 	${MKDIR} -p ${OBJECTDIR}

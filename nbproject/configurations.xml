@@ -6,6 +6,7 @@
                    projectFiles="true">
       <itemPath>Pipeline.h</itemPath>
       <itemPath>camera.h</itemPath>
+      <itemPath>lighting_technique.h</itemPath>
       <itemPath>math_3d.h</itemPath>
       <itemPath>technique.h</itemPath>
       <itemPath>texture.h</itemPath>
@@ -22,6 +23,7 @@
       <itemPath>camera.cpp</itemPath>
       <itemPath>main.cpp</itemPath>
       <itemPath>math_3d.cpp</itemPath>
+      <itemPath>technique.cpp</itemPath>
       <itemPath>texture.cpp</itemPath>
     </logicalFolder>
     <logicalFolder name="TestFiles"
@@ -73,11 +75,15 @@
       </item>
       <item path="camera.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lighting_technique.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="math_3d.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="math_3d.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="technique.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="technique.h" ex="false" tool="3" flavor2="0">
       </item>
@@ -116,11 +122,15 @@
       </item>
       <item path="camera.h" ex="false" tool="3" flavor2="0">
       </item>
+      <item path="lighting_technique.h" ex="false" tool="3" flavor2="0">
+      </item>
       <item path="main.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="math_3d.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="math_3d.h" ex="false" tool="3" flavor2="0">
+      </item>
+      <item path="technique.cpp" ex="false" tool="1" flavor2="0">
       </item>
       <item path="technique.h" ex="false" tool="3" flavor2="0">
       </item>
