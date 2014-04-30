@@ -30,6 +30,14 @@ bool Technique::Init(){
 }
 
 bool Technique::AddShader(GLenum shaderType, const char* fileName){
+    
+    std::string shaderText;
+    
+    if(!ReadFile(fileName,shaderText)){
+        fprintf(stderr, "Error reading shader file %s\n", fileName);
+        return false;
+    }
+    
     GLuint ShaderObj = glCreateShader(shaderType);
 
     if (ShaderObj == 0) {
@@ -38,9 +46,9 @@ bool Technique::AddShader(GLenum shaderType, const char* fileName){
     }
 
     const GLchar* p[1];
-    p[0] = fileName;
+    p[0] = shaderText.c_str();
     GLint Lengths[1];
-    Lengths[0]= strlen(fileName);
+    Lengths[0]= { shaderText.length()};
     glShaderSource(ShaderObj, 1, p, Lengths);
     glCompileShader(ShaderObj);
     GLint success;
@@ -48,7 +56,7 @@ bool Technique::AddShader(GLenum shaderType, const char* fileName){
     if (!success) {
         GLchar InfoLog[1024];
         glGetShaderInfoLog(ShaderObj, 1024, NULL, InfoLog);
-        fprintf(stderr, "Error compiling shader type %d: '%s'\n", shaderType, InfoLog);
+        fprintf(stderr, "Error compiling shader type %d from file %s: '%s'\n", shaderType, fileName, InfoLog);
         return false;
     }
 

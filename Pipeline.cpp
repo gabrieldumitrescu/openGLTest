@@ -45,7 +45,7 @@ void Pipeline::setCamera(const Vector3f& pos,const Vector3f& target,const Vector
     cameraInfo.up=up;
 }
 
-const Matrix4f* Pipeline::getTransform(){
+const Matrix4f& Pipeline::getTransform(){
     Matrix4f scMat,rotMat,transMat,persProjMat,cameraTranslMat,cameraTransfMat;
     scMat.initScale(scale.x,scale.y,scale.z);
     rotMat.initRotation(rotation.x,rotation.y,rotation.z);
@@ -54,5 +54,5 @@ const Matrix4f* Pipeline::getTransform(){
     cameraTranslMat.initTranslation(-cameraInfo.pos.x,-cameraInfo.pos.y,-cameraInfo.pos.z);
     cameraTransfMat.initCameraTransf(cameraInfo.target,cameraInfo.up);
     transform=persProjMat*cameraTransfMat*cameraTranslMat*transMat*rotMat*scMat;
-    return &transform;
+    return transform;
 }

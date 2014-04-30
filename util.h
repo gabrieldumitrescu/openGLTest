@@ -11,7 +11,7 @@
 #include <string.h>
 #include <fstream>
 
-bool ReadFile(const char* filename, std::string &text){
+static bool ReadFile(const char* filename, std::string &text){
   std::ifstream in(filename);
   if(!in.is_open()) return false;
   std::string line;

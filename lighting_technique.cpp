@@ -11,11 +11,12 @@ LightingTechnique::LightingTechnique(){
 bool LightingTechnique::Init(){
     if(!Technique::Init() || 
        !AddShader(GL_VERTEX_SHADER,"lighting.vs") ||
-       !AddShader(GL_FRAGMENT_SHADER,"lighting.fs"))
+       !AddShader(GL_FRAGMENT_SHADER,"lighting.fs") ||
+       !Technique::Finalize())
         return false;
     wVPLocation=GetUniformLocation("gWVP");
     samplerLocation=GetUniformLocation("gSampler");
-    dirLightColorLocation=GetUniformLocation("gDirectionalLight.color");
+    dirLightColorLocation=GetUniformLocation("gDirectionalLight.Color");
     dirLightAmbientIntensityLocation=GetUniformLocation("gDirectionalLight.AmbientIntensity");
     if(wVPLocation==INVALID_UNIFORM_LOCATION ||
        samplerLocation==INVALID_UNIFORM_LOCATION ||

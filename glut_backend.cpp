@@ -76,7 +76,7 @@ static void InitCallbacks(){
 }
 
 void GLUTBackendRun(ICallbacks* pCallbacks){
-    if(!s_pCallbacks){
+    if(!pCallbacks){
         fprintf(stderr,"%s : Callbacks not specified.\n",__FUNCTION__);
         return;
     }

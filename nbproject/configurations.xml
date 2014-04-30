@@ -40,6 +40,8 @@
                    projectFiles="false"
                    kind="IMPORTANT_FILES_FOLDER">
       <itemPath>Makefile</itemPath>
+      <itemPath>lighting.fs</itemPath>
+      <itemPath>lighting.vs</itemPath>
       <itemPath>shader.fs</itemPath>
       <itemPath>shader.vs</itemPath>
     </logicalFolder>
