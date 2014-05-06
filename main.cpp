@@ -20,7 +20,7 @@
 #include "camera.h"
 
 #define WINDOW_WIDTH 1366
-#define WINDOW_HEIGHT 768
+#define WINDOW_HEIGHT 800
 
 struct Vertex{
     Vector3f pos;
@@ -164,7 +164,7 @@ private:
 int main(int argc, char** argv){
     Magick::InitializeMagick(argv[0]);
     GLUTBackendInit(argc,argv);
-    if(!GLUTBackendCreateWindow(WINDOW_WIDTH,WINDOW_HEIGHT,32,false,"OpenGL Test")){
+    if(!GLUTBackendCreateWindow(WINDOW_WIDTH,WINDOW_HEIGHT,32,true,"OpenGL Test")){
         return 0;
     }
     

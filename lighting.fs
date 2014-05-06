@@ -2,6 +2,8 @@
 
 in vec2 TexCoord0;
 
+in vec3 Normal0;
+
 out vec4 FragColor;
 
 uniform sampler2D gSampler;
@@ -9,6 +11,8 @@ uniform sampler2D gSampler;
 struct DirectionalLight{
     vec3 Color;
     float AmbientIntensity;
+    vec3 Direction;
+    float DiffuseIntensity;
 };
 
 uniform DirectionalLight gDirectionalLight;

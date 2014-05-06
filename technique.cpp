@@ -48,7 +48,7 @@ bool Technique::AddShader(GLenum shaderType, const char* fileName){
     const GLchar* p[1];
     p[0] = shaderText.c_str();
     GLint Lengths[1];
-    Lengths[0]= { shaderText.length()};
+    Lengths[0]= shaderText.length();
     glShaderSource(ShaderObj, 1, p, Lengths);
     glCompileShader(ShaderObj);
     GLint success;

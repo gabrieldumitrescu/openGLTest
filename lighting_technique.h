@@ -14,6 +14,8 @@
 struct DirectionalLight{
     Vector3f color;
     float ambientIntensity;
+    Vector3f Direction;
+    float DiffuseIntensity;
 };
 
 class LightingTechnique: public Technique{
