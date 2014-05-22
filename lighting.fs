@@ -24,8 +24,8 @@ void main()
     float DiffuseFactor=dot(normalize(Normal0),-gDirectionalLight.Direction);
     vec4 DiffuseColor;
     if(DiffuseFactor>0){
-        DiffuseColor=vec4(gDirectionalLight.Direction,1.0) * 
-                    gDirectionaLight.DiffuseIntensity * DiffuseFactor;
+        DiffuseColor=vec4(gDirectionalLight.Color,1.0) * 
+                    gDirectionalLight.DiffuseIntensity * DiffuseFactor;
     }
     else{
         DiffuseColor=vec4(0.0,0.0,0.0,0.0);

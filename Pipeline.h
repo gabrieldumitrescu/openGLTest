@@ -19,9 +19,10 @@ public:
     void setPersProj(float FOV, float width, float height,float zNear, float zFar);
     void setCamera(const Vector3f& Pos,const Vector3f& lookAt,const Vector3f& up);
     const Matrix4f& getTransform();
+    const Matrix4f& getWorldTrans();
 private:
     Vector3f scale,rotation,translation;
-    Matrix4f transform;
+    Matrix4f wVPtransform,worldTransform;
     PersProjInfo persProj;
     struct{
       Vector3f pos,target,up;  

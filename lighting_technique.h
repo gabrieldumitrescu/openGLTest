@@ -23,6 +23,7 @@ public:
     LightingTechnique();
     virtual bool Init();
     void setWVP(const Matrix4f& wvp);
+    void setWorldMatrix(const Matrix4f& wvp);
     void setTextureUnit(unsigned int textureUnit);
     void setDirectionalLight(const DirectionalLight& dirLight);
 private:

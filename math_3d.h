@@ -53,6 +53,14 @@ inline Vector3f operator*(const Vector3f& v, float scalar){
     return result;
 }
 
+inline Vector3f operator+(const Vector3f& left, const Vector3f& right){
+    return Vector3f(left.x+right.x,left.y+right.y, left.z+right.z);
+}
+
+inline Vector3f operator-(const Vector3f& left, const Vector3f& right){
+    return Vector3f(left.x-right.x,left.y-right.y, left.z-right.z);
+}
+
 struct Matrix4f{
     float m[4][4];
     void initIdentity();

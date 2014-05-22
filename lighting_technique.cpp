@@ -15,6 +15,7 @@ bool LightingTechnique::Init(){
        !Technique::Finalize())
         return false;
     wVPLocation=GetUniformLocation("gWVP");
+    worldMatrixLocation=GetUniformLocation("gWorld");
     samplerLocation=GetUniformLocation("gSampler");
     dirLightLocation.color=GetUniformLocation("gDirectionalLight.Color");
     dirLightLocation.ambientIntensity=GetUniformLocation("gDirectionalLight.AmbientIntensity");
@@ -22,6 +23,7 @@ bool LightingTechnique::Init(){
     dirLightLocation.diffuseIntensity=GetUniformLocation("gDirectionalLight.DiffuseIntensity");
     
     if(wVPLocation==INVALID_UNIFORM_LOCATION ||
+       worldMatrixLocation==INVALID_UNIFORM_LOCATION ||
        samplerLocation==INVALID_UNIFORM_LOCATION ||
        dirLightLocation.color==INVALID_UNIFORM_LOCATION ||
        dirLightLocation.ambientIntensity==INVALID_UNIFORM_LOCATION || 
@@ -35,6 +37,10 @@ void LightingTechnique::setWVP(const Matrix4f& wvp){
     glUniformMatrix4fv(wVPLocation,1,GL_TRUE,(const GLfloat*)wvp.m);
 }
 
+void LightingTechnique::setWorldMatrix(const Matrix4f& wvp){
+    glUniformMatrix4fv(worldMatrixLocation,1,GL_TRUE,(const GLfloat*)wvp.m);
+}
+
 void LightingTechnique::setTextureUnit(unsigned int textureUnit){
     glUniform1i(samplerLocation,textureUnit);
 }
@@ -44,6 +50,7 @@ void LightingTechnique::setDirectionalLight(const DirectionalLight& dirLight){
     glUniform1f(dirLightLocation.ambientIntensity , dirLight.ambientIntensity);
     Vector3f direction;
     direction=dirLight.Direction;
+    direction.normalize();
     glUniform3f(dirLightLocation.direction,direction.x,direction.y,direction.z);
     glUniform1f(dirLightLocation.diffuseIntensity,dirLight.DiffuseIntensity);
 }
