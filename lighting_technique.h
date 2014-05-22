@@ -26,8 +26,12 @@ public:
     void setTextureUnit(unsigned int textureUnit);
     void setDirectionalLight(const DirectionalLight& dirLight);
 private:
-    GLuint wVPLocation,samplerLocation,dirLightColorLocation,
-            dirLightAmbientIntensityLocation;
+    GLuint wVPLocation,worldMatrixLocation,samplerLocation;
+    struct {
+        GLuint color,ambientIntensity;
+        GLuint direction,diffuseIntensity;
+        
+    }dirLightLocation;
     
 };
 

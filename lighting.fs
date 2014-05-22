@@ -19,7 +19,16 @@ uniform DirectionalLight gDirectionalLight;
 
 void main()
 {
-    FragColor = texture2D(gSampler, TexCoord0.xy)*
-                vec4(gDirectionalLight.Color,1.0f)*
+    vec4 AmbientColor=vec4(gDirectionalLight.Color,1.0f)*
                 gDirectionalLight.AmbientIntensity;
+    float DiffuseFactor=dot(normalize(Normal0),-gDirectionalLight.Direction);
+    vec4 DiffuseColor;
+    if(DiffuseFactor>0){
+        DiffuseColor=vec4(gDirectionalLight.Direction,1.0) * 
+                    gDirectionaLight.DiffuseIntensity * DiffuseFactor;
+    }
+    else{
+        DiffuseColor=vec4(0.0,0.0,0.0,0.0);
+    }
+    FragColor = texture2D(gSampler, TexCoord0.xy)*(AmbientColor + DiffuseColor);
 }
