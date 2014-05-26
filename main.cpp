@@ -125,6 +125,9 @@ public:
         pEffect->setWorldMatrix(worldMatrix);
         
         pEffect->setDirectionalLight(directionalLight);
+        pEffect->setEyeWorldPos(pGameCamera->getPosition());
+        pEffect->setMatSpecularIntensity(1.0f);
+        pEffect->setMatSpecularPower(8.0f);
 
         glEnableVertexAttribArray(0);
         glEnableVertexAttribArray(1);

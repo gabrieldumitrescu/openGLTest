@@ -21,6 +21,9 @@ bool LightingTechnique::Init(){
     dirLightLocation.ambientIntensity=GetUniformLocation("gDirectionalLight.AmbientIntensity");
     dirLightLocation.direction=GetUniformLocation("gDirectionalLight.Direction");
     dirLightLocation.diffuseIntensity=GetUniformLocation("gDirectionalLight.DiffuseIntensity");
+    eyeWorldPosLocation=GetUniformLocation("gEyeWorldPos");
+    matSpecularIntensityLocation=GetUniformLocation("gMatSpecularIntensity");
+    matSpecularPowerLocation=GetUniformLocation("gMatSpecularPower");
     
     if(wVPLocation==INVALID_UNIFORM_LOCATION ||
        worldMatrixLocation==INVALID_UNIFORM_LOCATION ||
@@ -28,7 +31,10 @@ bool LightingTechnique::Init(){
        dirLightLocation.color==INVALID_UNIFORM_LOCATION ||
        dirLightLocation.ambientIntensity==INVALID_UNIFORM_LOCATION || 
        dirLightLocation.direction==INVALID_UNIFORM_LOCATION || 
-       dirLightLocation.diffuseIntensity==INVALID_UNIFORM_LOCATION)
+       dirLightLocation.diffuseIntensity==INVALID_UNIFORM_LOCATION ||
+       eyeWorldPosLocation==INVALID_UNIFORM_LOCATION ||
+       matSpecularIntensityLocation==INVALID_UNIFORM_LOCATION ||
+       matSpecularPowerLocation==INVALID_UNIFORM_LOCATION)
         return false;
     return true;
 }
@@ -53,4 +59,17 @@ void LightingTechnique::setDirectionalLight(const DirectionalLight& dirLight){
     direction.normalize();
     glUniform3f(dirLightLocation.direction,direction.x,direction.y,direction.z);
     glUniform1f(dirLightLocation.diffuseIntensity,dirLight.DiffuseIntensity);
+}
+
+
+void LightingTechnique::setEyeWorldPos(const Vector3f& eyeWorldPos){
+    glUniform3f(eyeWorldPosLocation,eyeWorldPos.x,eyeWorldPos.y,eyeWorldPos.z);
+}
+
+void LightingTechnique::setMatSpecularIntensity(float intensity){
+    glUniform1f(matSpecularIntensityLocation,intensity);
+}
+
+void LightingTechnique::setMatSpecularPower(float power){
+    glUniform1f(matSpecularPowerLocation,power);
 }

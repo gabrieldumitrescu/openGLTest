@@ -26,8 +26,17 @@ public:
     void setWorldMatrix(const Matrix4f& wvp);
     void setTextureUnit(unsigned int textureUnit);
     void setDirectionalLight(const DirectionalLight& dirLight);
+    void setEyeWorldPos(const Vector3f& eyeWorldPos);
+    void setMatSpecularIntensity(float intensity);
+    void setMatSpecularPower(float power);
 private:
-    GLuint wVPLocation,worldMatrixLocation,samplerLocation;
+    GLuint wVPLocation,
+           worldMatrixLocation,
+           samplerLocation,
+           eyeWorldPosLocation,
+           matSpecularIntensityLocation,
+           matSpecularPowerLocation;
+           
     struct {
         GLuint color,ambientIntensity;
         GLuint direction,diffuseIntensity;
