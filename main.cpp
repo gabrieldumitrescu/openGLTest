@@ -41,10 +41,10 @@ public:
         pGameCamera=NULL;
         pEffect=NULL;
         scale=0.0f;
-        directionalLight.ambientIntensity=0.01;
+        directionalLight.ambientIntensity=0.00f;
         directionalLight.color=Vector3f(1.0f,1.0f,1.0f);
-        directionalLight.DiffuseIntensity=0.75f;
-        directionalLight.Direction=Vector3f(1.0f,0.0f,0.0f);
+        directionalLight.DiffuseIntensity=0.2f;
+        directionalLight.Direction=Vector3f(0.0f,0.0f,1.0f);
     }
     
     /*Calculates vertex normals as an average of the normals of all the triangles
